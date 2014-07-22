@@ -2,7 +2,7 @@
  * Laravel BootstrapValidator ()
  * 
  *
- * @version     v0.0.1, built on 2014-07-22 1:51:51 PM
+ * @version     v0.0.1, built on 2014-07-22 5:53:10 PM
  * @author      
  * @copyright   (c) 2014 
  * @license     
@@ -10,7 +10,7 @@
 (function($) {
 
     $.fn.bootstrapValidator.i18n.accepted = $.extend($.fn.bootstrapValidator.i18n.accepted || {}, {
-        'default' : 'The selected value is invalid'
+        'default' : 'You must accept'
     });
 
     $.fn.bootstrapValidator.validators.accepted = {
@@ -19,11 +19,21 @@
 
             var value = $field.val();
 
+            if(value == '') {
+                return true;
+            }
+
+            value = value.toLowerCase();
+
+            if(value === 'yes' || value === 'on' || value == '1') {
+                return true;
+            }
+
             var message = options.message['accepted'] || options.message || $.fn.bootstrapValidator.i18n.accepted.default;
 
             return {
-                valid : $.inArray(value, options.values) == -1,
-                message : $.fn.bootstrapValidator.helpers.format(message, options.accepted)
+                valid : false,
+                message : message
             }
         }
     };
@@ -60,6 +70,102 @@
 }(window.jQuery));
 ;(function($) {
 
+    $.fn.bootstrapValidator.i18n.alpha = $.extend($.fn.bootstrapValidator.i18n.alpha || {}, {
+        'default' : 'Must only contain letters'
+    });
+
+    $.fn.bootstrapValidator.validators.alpha = {
+
+        validate: function(validator, $field, options) {
+
+            var value = $field.val();
+
+            if(value == '') {
+                return true;
+            }
+
+            var pattern = new RegExp(/^[a-z]+$/i);
+
+            if(pattern.test(value)) {
+                return true;
+            }
+
+            var message = options.message['alpha'] || options.message || $.fn.bootstrapValidator.i18n.alpha.default;
+
+            return {
+                valid : false,
+                message : message
+            }
+        }
+    };
+
+}(window.jQuery));
+;(function($) {
+
+    $.fn.bootstrapValidator.i18n.alphaDash = $.extend($.fn.bootstrapValidator.i18n.alphaDash || {}, {
+        'default' : 'Must only contain letters, numbers and dashes'
+    });
+
+    $.fn.bootstrapValidator.validators.alphaDash = {
+
+        validate: function(validator, $field, options) {
+
+            var value = $field.val();
+
+            if(value == '') {
+                return true;
+            }
+
+            var pattern = new RegExp(/^[a-z0-9\-_]+$/i);
+
+            if(pattern.test(value)) {
+                return true;
+            }
+
+            var message = options.message['alphaDash'] || options.message || $.fn.bootstrapValidator.i18n.alphaDash.default;
+
+            return {
+                valid : false,
+                message : message
+            }
+        }
+    };
+
+}(window.jQuery));
+;(function($) {
+
+    $.fn.bootstrapValidator.i18n.alphaNum = $.extend($.fn.bootstrapValidator.i18n.alphaNum || {}, {
+        'default' : 'Must only contain letters and numbers'
+    });
+
+    $.fn.bootstrapValidator.validators.alphaNum = {
+
+        validate: function(validator, $field, options) {
+
+            var value = $field.val();
+
+            if(value == '') {
+                return true;
+            }
+
+            var pattern = new RegExp(/^[a-z0-9]+$/i);
+
+            if(pattern.test(value)) {
+                return true;
+            }
+
+            var message = options.message['alphaNum'] || options.message || $.fn.bootstrapValidator.i18n.alphaNum.default;
+
+            return {
+                valid : false,
+                message : message
+            }
+        }
+    };
+
+}(window.jQuery));
+;(function($) {
+
     $.fn.bootstrapValidator.i18n.before = $.extend($.fn.bootstrapValidator.i18n.before || {}, {
         'default' : 'Date must be before %s'
     });
@@ -82,6 +188,90 @@
             return {
                 valid : date.isBefore(before),
                 message : $.fn.bootstrapValidator.helpers.format(message, options.before)
+            }
+        }
+    };
+
+}(window.jQuery));
+;(function($) {
+
+    $.fn.bootstrapValidator.i18n.between = $.extend($.fn.bootstrapValidator.i18n.between || {}, {
+        'string' : 'Must be between %s and %s characters',
+        'numeric' : 'Please enter a value between %s and %s'
+    });
+
+    $.fn.bootstrapValidator.validators.between = {
+
+        validate: function(validator, $field, options) {
+
+            var value = $field.val(),
+                size, message;
+
+            if(isNaN(value)) {
+                size = value.length;
+                message = options.message['string'] || options.message || $.fn.bootstrapValidator.i18n.between.string;
+            } else {
+                size = parseFloat(value);
+                message = options.message['numeric'] || options.message || $.fn.bootstrapValidator.i18n.between.numeric;
+            }
+
+            return {
+                valid : size >= options.min && size <= options.max,
+                message : $.fn.bootstrapValidator.helpers.format(message, options.min, options.max)
+            }
+        }
+    };
+
+}(window.jQuery));
+;(function($) {
+
+    $.fn.bootstrapValidator.i18n.digitsBetween = $.extend($.fn.bootstrapValidator.i18n.digitsBetween || {}, {
+        'default' : 'Must contain between %s and %s digits'
+    });
+
+    $.fn.bootstrapValidator.validators.digitsBetween = {
+
+        validate: function(validator, $field, options) {
+
+            var value = $field.val();
+
+            if(value == '') {
+                return true;
+            }
+
+            var pattern = new RegExp('^[0-9]{' + options.min + ',' + options.max + '}$');
+
+            if(pattern.test(value)) {
+                return true;
+            }
+
+            var message = options.message['digitsBetween'] || options.message || $.fn.bootstrapValidator.i18n.digitsBetween.default;
+
+            return {
+                valid : false,
+                message : $.fn.bootstrapValidator.helpers.format(message, options.min, options.max)
+            }
+        }
+    };
+
+}(window.jQuery));
+;(function($) {
+
+    $.fn.bootstrapValidator.i18n.in = $.extend($.fn.bootstrapValidator.i18n.in || {}, {
+        'default' : 'The selected value is invalid'
+    });
+
+    $.fn.bootstrapValidator.validators.in = {
+
+        validate: function(validator, $field, options) {
+
+            var value = $field.val();
+
+            var message = options.message['in'] || options.message || $.fn.bootstrapValidator.i18n.in.default;
+
+            return {
+                valid : $.inArray(value, options.values) >= 0,
+                message : message
             }
         }
     };
@@ -164,6 +354,38 @@
             return {
                 valid : $.inArray(value, options.values) == -1,
                 message : message
+            }
+        }
+    };
+
+}(window.jQuery));
+;(function($) {
+
+    $.fn.bootstrapValidator.i18n.numDigits = $.extend($.fn.bootstrapValidator.i18n.numDigits || {}, {
+        'default' : 'Must contain %s digits'
+    });
+
+    $.fn.bootstrapValidator.validators.numDigits = {
+
+        validate: function(validator, $field, options) {
+
+            var value = $field.val();
+
+            if(value == '') {
+                return true;
+            }
+
+            var pattern = new RegExp('^[0-9]{' + options.digits + '}$');
+
+            if(pattern.test(value)) {
+                return true;
+            }
+
+            var message = options.message['numDigits'] || options.message || $.fn.bootstrapValidator.i18n.numDigits.default;
+
+            return {
+                valid : false,
+                message : $.fn.bootstrapValidator.helpers.format(message, options.digits)
             }
         }
     };
@@ -258,7 +480,7 @@
 
             var value = $field.val(),
                 required = false,
-                requiredField;
+                requiredField = '';
 
             $.each(options.fields, function(ix, field) {
 
@@ -285,6 +507,122 @@
             return {
                 valid : false,
                 message : message
+            }
+        }
+    };
+
+}(window.jQuery));
+;(function($) {
+
+    $.fn.bootstrapValidator.i18n.requiredWithout = $.extend($.fn.bootstrapValidator.i18n.requiredWithout || {}, {
+        'default' : 'This is required'
+    });
+
+    $.fn.bootstrapValidator.validators.requiredWithout = {
+
+        validate: function(validator, $field, options) {
+
+            var value = $field.val(),
+                required = false,
+                requiredField = '';
+
+            $.each(options.fields, function(ix, field) {
+
+                var $field = validator.getFieldElements(field);
+
+                if (!$field || $field.val() == '') {
+                    required = true;
+                    requiredField = field;
+                    return false;
+                }
+
+            });
+
+            if(!required) {
+                return true;
+            }
+
+            if(value !== '') {
+                return true;
+            }
+
+            var message = options.message['requiredWithout'] || options.message || $.fn.bootstrapValidator.i18n.requiredWithout.default;
+
+            return {
+                valid : false,
+                message : $.fn.bootstrapValidator.helpers.format(message, requiredField)
+            }
+        }
+    };
+
+}(window.jQuery));
+;(function($) {
+
+    $.fn.bootstrapValidator.i18n.requiredWithoutAll = $.extend($.fn.bootstrapValidator.i18n.requiredWithoutAll || {}, {
+        'default' : 'This is required'
+    });
+
+    $.fn.bootstrapValidator.validators.requiredWithoutAll = {
+
+        validate: function(validator, $field, options) {
+
+            var value = $field.val(),
+                required = true;
+
+            $.each(options.fields, function(ix, field) {
+
+                var $field = validator.getFieldElements(field);
+
+                if ($field && $field.val() !== '') {
+                    required = false;
+                    return false;
+                }
+
+            });
+
+            if(!required) {
+                return true;
+            }
+
+            if(value !== '') {
+                return true;
+            }
+
+            var message = options.message['requiredWithoutAll'] || options.message || $.fn.bootstrapValidator.i18n.requiredWithoutAll.default;
+
+            return {
+                valid : false,
+                message : $.fn.bootstrapValidator.helpers.format(message, options.fields.join(', '))
+            }
+        }
+    };
+
+}(window.jQuery));
+;(function($) {
+
+    $.fn.bootstrapValidator.i18n.size = $.extend($.fn.bootstrapValidator.i18n.size || {}, {
+        'string' : 'Please enter exactly %s characters',
+        'numeric' : 'Must be %s'
+    });
+
+    $.fn.bootstrapValidator.validators.size = {
+
+        validate: function(validator, $field, options) {
+
+            var value = $field.val(),
+                size, message;
+
+            if(isNaN(value)) {
+                size = value.length;
+                message = options.message['string'] || options.message || $.fn.bootstrapValidator.i18n.size.string;
+            } else {
+                size = parseFloat(value);
+                message = options.message['numeric'] || options.message || $.fn.bootstrapValidator.i18n.size.numeric;
+            }
+
+            return {
+                valid : size == options.size,
+                message : $.fn.bootstrapValidator.helpers.format(message, options.size)
             }
         }
     };
