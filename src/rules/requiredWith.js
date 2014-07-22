@@ -10,7 +10,7 @@
 
             var value = $field.val(),
                 required = false,
-                requiredField;
+                requiredField = '';
 
             $.each(options.fields, function(ix, field) {
 
