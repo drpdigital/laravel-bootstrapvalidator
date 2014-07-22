@@ -1,0 +1,23 @@
+{
+    "name": "Laravel BootstrapValidator",
+    "version": "0.0.1",
+    "description": "",
+    "keywords": [],
+    "author": {
+        "name": "",
+        "email": "",
+        "url": ""
+    },
+    "homepage": "",
+    "license": "MIT",
+    "main": "./dist/js/laravel-bootstrapValidator.js",
+    "devDependencies": {
+        "grunt": "latest",
+        "grunt-contrib-concat": "latest",
+        "grunt-contrib-copy": "latest",
+        "grunt-contrib-cssmin": "latest",
+        "grunt-contrib-jshint": "latest",
+        "grunt-contrib-uglify": "latest",
+        "grunt-contrib-watch": "latest"
+    }
+}
