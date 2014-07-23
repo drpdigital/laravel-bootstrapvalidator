@@ -1,3 +1,7 @@
+/**
+ * Client side equivalent to Laravel "not_in" validator
+ * The field under validation must not be included in the given list of values.
+ */
 (function($) {
 
     $.fn.bootstrapValidator.i18n.notIn = $.extend($.fn.bootstrapValidator.i18n.notIn || {}, {

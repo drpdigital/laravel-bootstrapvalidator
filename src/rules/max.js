@@ -1,3 +1,7 @@
+/**
+ * Client side equivalent to Laravel "max" validator
+ * The field under validation must be less than or equal to a maximum value.
+ */
 (function($) {
 
     $.fn.bootstrapValidator.i18n.max = $.extend($.fn.bootstrapValidator.i18n.max || {}, {

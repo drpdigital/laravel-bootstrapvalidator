@@ -1,3 +1,7 @@
+/**
+ * Client side equivalent to Laravel "digits" validator
+ * The field under validation must be numeric and must have an exact length of value.
+ */
 (function($) {
 
     $.fn.bootstrapValidator.i18n.digitsBetween = $.extend($.fn.bootstrapValidator.i18n.digitsBetween || {}, {

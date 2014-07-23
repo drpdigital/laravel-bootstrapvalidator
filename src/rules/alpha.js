@@ -1,3 +1,7 @@
+/**
+ * Client side equivalent to Laravel "alpha" validator
+ * The field under validation must be entirely alphabetic characters.
+ */
 (function($) {
 
     $.fn.bootstrapValidator.i18n.alpha = $.extend($.fn.bootstrapValidator.i18n.alpha || {}, {

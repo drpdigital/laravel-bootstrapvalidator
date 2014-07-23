@@ -1,3 +1,7 @@
+/**
+ * Client side equivalent to Laravel "required_with" validator
+ * The field under validation must be present only if any of the other specified fields are present.
+ */
 (function($) {
 
     $.fn.bootstrapValidator.i18n.requiredWith = $.extend($.fn.bootstrapValidator.i18n.requiredWith || {}, {

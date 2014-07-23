@@ -1,3 +1,7 @@
+/**
+ * Client side equivalent to Laravel "after" validator
+ * The field under validation must be a value after a given date.
+ */
 (function($) {
 
     $.fn.bootstrapValidator.i18n.after = $.extend($.fn.bootstrapValidator.i18n.after || {}, {

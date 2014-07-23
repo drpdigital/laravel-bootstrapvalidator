@@ -1,3 +1,7 @@
+/**
+ * Client side equivalent to Laravel "min" validator
+ * The field under validation must have a minimum value.
+ */
 (function($) {
 
     $.fn.bootstrapValidator.i18n.min = $.extend($.fn.bootstrapValidator.i18n.min || {}, {

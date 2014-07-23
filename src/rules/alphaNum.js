@@ -1,3 +1,7 @@
+/**
+ * Client side equivalent to Laravel "alpha_num" validator
+ * The field under validation must be entirely alpha-numeric characters.
+ */
 (function($) {
 
     $.fn.bootstrapValidator.i18n.alphaNum = $.extend($.fn.bootstrapValidator.i18n.alphaNum || {}, {

@@ -1,3 +1,7 @@
+/**
+ * Client side equivalent to Laravel "size" validator
+ * The field under validation must have a size matching the given value. For string data, value corresponds to the number of characters. For numeric data, value corresponds to a given integer value.
+ */
 (function($) {
 
     $.fn.bootstrapValidator.i18n.size = $.extend($.fn.bootstrapValidator.i18n.size || {}, {

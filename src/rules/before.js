@@ -1,3 +1,7 @@
+/**
+ * Client side equivalent to Laravel "before" validator
+ * The field under validation must be a value preceding the given date.
+ */
 (function($) {
 
     $.fn.bootstrapValidator.i18n.before = $.extend($.fn.bootstrapValidator.i18n.before || {}, {

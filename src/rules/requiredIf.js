@@ -1,3 +1,7 @@
+/**
+ * Client side equivalent to Laravel "required_if" validator
+ * The field under validation must be present if the field field is equal to value.
+ */
 (function($) {
 
     $.fn.bootstrapValidator.i18n.requiredIf = $.extend($.fn.bootstrapValidator.i18n.requiredIf || {}, {

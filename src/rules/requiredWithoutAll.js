@@ -1,3 +1,7 @@
+/**
+ * Client side equivalent to Laravel "required_without_all" validator
+ * The field under validation must be present only when the all of the other specified fields are not present.
+ */
 (function($) {
 
     $.fn.bootstrapValidator.i18n.requiredWithoutAll = $.extend($.fn.bootstrapValidator.i18n.requiredWithoutAll || {}, {

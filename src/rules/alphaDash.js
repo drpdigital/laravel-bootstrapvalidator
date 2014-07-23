@@ -1,3 +1,7 @@
+/**
+ * Client side equivalent to Laravel "alpha_dash" validator
+ * The field under validation may have alpha-numeric characters, as well as dashes and underscores.
+ */
 (function($) {
 
     $.fn.bootstrapValidator.i18n.alphaDash = $.extend($.fn.bootstrapValidator.i18n.alphaDash || {}, {

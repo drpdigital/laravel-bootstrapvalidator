@@ -1,3 +1,7 @@
+/**
+ * Client side equivalent to Laravel "between" validator
+ * The field under validation must have a size between the given min and max.
+ */
 (function($) {
 
     $.fn.bootstrapValidator.i18n.between = $.extend($.fn.bootstrapValidator.i18n.between || {}, {

@@ -1,3 +1,7 @@
+/**
+ * Client side equivalent to Laravel "accepted" validator
+ * The field under validation must be yes, on, or 1. This is useful for validating "Terms of Service" acceptance.
+ */
 (function($) {
 
     $.fn.bootstrapValidator.i18n.accepted = $.extend($.fn.bootstrapValidator.i18n.accepted || {}, {
