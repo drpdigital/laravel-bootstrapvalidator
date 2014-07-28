@@ -2,7 +2,7 @@
  * Laravel BootstrapValidator ()
  * 
  *
- * @version     v0.0.1, built on 2014-07-22 5:53:10 PM
+ * @version     v0.0.1, built on 2014-07-28 10:36:42 AM
  * @author      
  * @copyright   (c) 2014 
  * @license     
@@ -291,6 +291,10 @@
             var value = $field.val(),
                 size, message;
 
+            if(value == '') {
+                return true;
+            }
+
             if(isNaN(value)) {
                 size = value.length;
                 message = options.message['string'] || options.message || $.fn.bootstrapValidator.i18n.max.string;
@@ -320,6 +324,10 @@
 
             var value = $field.val(),
                 size, message;
+
+            if(value == '') {
+                return true;
+            }
 
             if(isNaN(value)) {
                 size = value.length;

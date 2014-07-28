@@ -16,6 +16,10 @@
             var value = $field.val(),
                 size, message;
 
+            if(value == '') {
+                return true;
+            }
+
             if(isNaN(value)) {
                 size = value.length;
                 message = options.message['string'] || options.message || $.fn.bootstrapValidator.i18n.max.string;
