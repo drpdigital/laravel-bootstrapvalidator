@@ -31,6 +31,10 @@
             }
 
             if(value !== '') {
+                $.each(options.fields, function(ix, field) {
+                    // clear the error state on the other fields because this one is ok
+                    validator.updateStatus(field, 'NOT_VALIDATED', null);
+                });
                 return true;
             }
 
@@ -39,7 +43,7 @@
             return {
                 valid : false,
                 message : $.fn.bootstrapValidator.helpers.format(message, options.fields.join(', '))
-            }
+            };
         }
     };
 
