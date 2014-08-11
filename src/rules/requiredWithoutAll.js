@@ -13,8 +13,11 @@
         validate: function(validator, $field, options) {
 
             var value = $field.val(),
-                required = true;
+                required = true,
+                valid = false,
+                status = null;
 
+            // check to see if any of the other fields has content
             $.each(options.fields, function(ix, field) {
 
                 var $field = validator.getFieldElements(field);
@@ -27,21 +30,36 @@
             });
 
             if(!required) {
-                return true;
+
+                // one of the other fields has content, so this one is ok
+                valid = true;
             }
 
             if(value !== '') {
-                $.each(options.fields, function(ix, field) {
-                    // clear the error state on the other fields because this one is ok
-                    validator.updateStatus(field, 'NOT_VALIDATED', null);
-                });
-                return true;
+
+                // the other fields can pass because this one has content
+                status = 'VALID';
+                valid = true;
+
+            } else {
+
+                // everything is a fail because they are all empty
+                status = 'INVALID';
+                valid = false;
+
             }
 
-            var message = options.message['requiredWithoutAll'] || options.message || $.fn.bootstrapValidator.i18n.requiredWithoutAll.default;
+            // update the status of the other fields
+            if(status) {
+                $.each(options.fields, function(ix, field) {
+                    validator.updateStatus(field, status, null);
+                });
+            }
+
+            var message = options.message['requiredWithoutAll'] || options.message || $.fn.bootstrapValidator.i18n.requiredWithoutAll['default'];
 
             return {
-                valid : false,
+                valid : valid,
                 message : $.fn.bootstrapValidator.helpers.format(message, options.fields.join(', '))
             };
         }
