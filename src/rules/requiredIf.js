@@ -19,6 +19,12 @@
                 return true;
             }
 
+            if( compareWith.is('[type=checkbox]') ) {
+
+                if( !compareWith.is(':checked') ) { return true; }
+
+            }
+
             if (compareWith.val() !== options.value) {
                 return true;
             }
@@ -27,7 +33,7 @@
                 return true;
             }
 
-            var message = options.message['requiredIf'] || options.message || $.fn.bootstrapValidator.i18n.requiredIf.default;
+            var message = options.message['requiredIf'] || options.message || $.fn.bootstrapValidator.i18n.requiredIf['default'];
 
             return {
                 valid : false,

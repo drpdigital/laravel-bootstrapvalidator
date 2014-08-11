@@ -4,17 +4,17 @@
  */
 (function($) {
 
-    $.fn.bootstrapValidator.i18n.in = $.extend($.fn.bootstrapValidator.i18n.in || {}, {
+    $.fn.bootstrapValidator.i18n.isIn = $.extend($.fn.bootstrapValidator.i18n.isIn || {}, {
         'default' : 'The selected value is invalid'
     });
 
-    $.fn.bootstrapValidator.validators.in = {
+    $.fn.bootstrapValidator.validators.isIn = {
 
         validate: function(validator, $field, options) {
 
             var value = $field.val();
 
-            var message = options.message['in'] || options.message || $.fn.bootstrapValidator.i18n.in.default;
+            var message = options.message['isIn'] || options.message || $.fn.bootstrapValidator.i18n.isIn['default'];
 
             return {
                 valid : $.inArray(value, options.values) >= 0,

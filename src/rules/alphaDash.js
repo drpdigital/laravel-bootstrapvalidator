@@ -24,7 +24,7 @@
                 return true;
             }
 
-            var message = options.message['alphaDash'] || options.message || $.fn.bootstrapValidator.i18n.alphaDash.default;
+            var message = options.message['alphaDash'] || options.message || $.fn.bootstrapValidator.i18n.alphaDash['default'];
 
             return {
                 valid : false,

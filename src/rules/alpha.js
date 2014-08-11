@@ -24,7 +24,7 @@
                 return true;
             }
 
-            var message = options.message['alpha'] || options.message || $.fn.bootstrapValidator.i18n.alpha.default;
+            var message = options.message['alpha'] || options.message || $.fn.bootstrapValidator.i18n.alpha['default'];
 
             return {
                 valid : false,

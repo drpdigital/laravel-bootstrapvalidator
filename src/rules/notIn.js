@@ -14,7 +14,7 @@
 
             var value = $field.val();
 
-            var message = options.message['notIn'] || options.message || $.fn.bootstrapValidator.i18n.notIn.default;
+            var message = options.message['notIn'] || options.message || $.fn.bootstrapValidator.i18n.notIn['default'];
 
             return {
                 valid : $.inArray(value, options.values) == -1,

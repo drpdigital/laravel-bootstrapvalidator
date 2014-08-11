@@ -34,7 +34,7 @@
                 return true;
             }
 
-            var message = options.message['requiredWithAll'] || options.message || $.fn.bootstrapValidator.i18n.requiredWithAll.default;
+            var message = options.message['requiredWithAll'] || options.message || $.fn.bootstrapValidator.i18n.requiredWithAll['default'];
 
             return {
                 valid : false,

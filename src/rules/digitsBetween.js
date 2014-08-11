@@ -24,7 +24,7 @@
                 return true;
             }
 
-            var message = options.message['digitsBetween'] || options.message || $.fn.bootstrapValidator.i18n.digitsBetween.default;
+            var message = options.message['digitsBetween'] || options.message || $.fn.bootstrapValidator.i18n.digitsBetween['default'];
 
             return {
                 valid : false,

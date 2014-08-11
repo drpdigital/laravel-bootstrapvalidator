@@ -24,7 +24,7 @@
                 return true;
             }
 
-            var message = options.message['numDigits'] || options.message || $.fn.bootstrapValidator.i18n.numDigits.default;
+            var message = options.message['numDigits'] || options.message || $.fn.bootstrapValidator.i18n.numDigits['default'];
 
             return {
                 valid : false,

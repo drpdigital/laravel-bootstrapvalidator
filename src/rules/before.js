@@ -14,14 +14,14 @@
 
             var value = $field.val();
 
-            var date = new moment(value, 'DD-MM-YYYY', true);
+            var date = moment(value, 'DD-MM-YYYY HH:mm:ss');
 
             if (!date.isValid()) {
                 return false;
             }
 
-            var before = new moment(options.before, 'DD-MM-YYYY', true);
-            var message = options.message['before'] || options.message || $.fn.bootstrapValidator.i18n.before.default;
+            var before = moment(options.before, 'DD-MM-YYYY HH:mm:ss');
+            var message = options.message['before'] || options.message || $.fn.bootstrapValidator.i18n.before['default'];
 
             return {
                 valid : date.isBefore(before),

@@ -36,7 +36,7 @@
                 return true;
             }
 
-            var message = options.message['requiredWithout'] || options.message || $.fn.bootstrapValidator.i18n.requiredWithout.default;
+            var message = options.message['requiredWithout'] || options.message || $.fn.bootstrapValidator.i18n.requiredWithout['default'];
 
             return {
                 valid : false,

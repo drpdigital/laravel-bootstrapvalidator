@@ -24,7 +24,7 @@
                 return true;
             }
 
-            var message = options.message['accepted'] || options.message || $.fn.bootstrapValidator.i18n.accepted.default;
+            var message = options.message['accepted'] || options.message || $.fn.bootstrapValidator.i18n.accepted['default'];
 
             return {
                 valid : false,
