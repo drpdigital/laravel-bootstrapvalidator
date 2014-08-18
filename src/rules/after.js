@@ -14,6 +14,10 @@
 
             var value = $field.val();
 
+            if(value == '') {
+                return true;
+            }
+
             var date = moment(value, 'DD-MM-YYYY HH:mm:ss');
 
             if (!date.isValid()) {
