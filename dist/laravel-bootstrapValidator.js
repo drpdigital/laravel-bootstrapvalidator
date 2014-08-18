@@ -2,7 +2,7 @@
  * Laravel BootstrapValidator ()
  * 
  *
- * @version     v0.0.1, built on 2014-07-28 10:36:42 AM
+ * @version     v0.0.1, built on 2014-08-13 2:40:11 PM
  * @author      
  * @copyright   (c) 2014 
  * @license     
@@ -29,7 +29,7 @@
                 return true;
             }
 
-            var message = options.message['accepted'] || options.message || $.fn.bootstrapValidator.i18n.accepted.default;
+            var message = options.message['accepted'] || options.message || $.fn.bootstrapValidator.i18n.accepted['default'];
 
             return {
                 valid : false,
@@ -51,14 +51,14 @@
 
             var value = $field.val();
 
-            var date = new moment(value, 'DD-MM-YYYY', true);
+            var date = moment(value, 'DD-MM-YYYY HH:mm:ss');
 
             if (!date.isValid()) {
                 return false;
             }
 
-            var after = new moment(options.after, 'DD-MM-YYYY', true);
-            var message = options.message['after'] || options.message || $.fn.bootstrapValidator.i18n.after.default;
+            var after = moment(options.after, 'DD-MM-YYYY HH:mm:ss');
+            var message = options.message['after'] || options.message || $.fn.bootstrapValidator.i18n.after['default'];
 
             return {
                 valid : date.isAfter(after),
@@ -90,7 +90,7 @@
                 return true;
             }
 
-            var message = options.message['alpha'] || options.message || $.fn.bootstrapValidator.i18n.alpha.default;
+            var message = options.message['alpha'] || options.message || $.fn.bootstrapValidator.i18n.alpha['default'];
 
             return {
                 valid : false,
@@ -122,7 +122,7 @@
                 return true;
             }
 
-            var message = options.message['alphaDash'] || options.message || $.fn.bootstrapValidator.i18n.alphaDash.default;
+            var message = options.message['alphaDash'] || options.message || $.fn.bootstrapValidator.i18n.alphaDash['default'];
 
             return {
                 valid : false,
@@ -154,7 +154,7 @@
                 return true;
             }
 
-            var message = options.message['alphaNum'] || options.message || $.fn.bootstrapValidator.i18n.alphaNum.default;
+            var message = options.message['alphaNum'] || options.message || $.fn.bootstrapValidator.i18n.alphaNum['default'];
 
             return {
                 valid : false,
@@ -176,14 +176,14 @@
 
             var value = $field.val();
 
-            var date = new moment(value, 'DD-MM-YYYY', true);
+            var date = moment(value, 'DD-MM-YYYY HH:mm:ss');
 
             if (!date.isValid()) {
                 return false;
             }
 
-            var before = new moment(options.before, 'DD-MM-YYYY', true);
-            var message = options.message['before'] || options.message || $.fn.bootstrapValidator.i18n.before.default;
+            var before = moment(options.before, 'DD-MM-YYYY HH:mm:ss');
+            var message = options.message['before'] || options.message || $.fn.bootstrapValidator.i18n.before['default'];
 
             return {
                 valid : date.isBefore(before),
@@ -207,7 +207,14 @@
             var value = $field.val(),
                 size, message;
 
-            if(isNaN(value)) {
+            if(value == '') {
+                return true;
+            }
+
+            if($field.attr('type') == 'file') {
+                // can't properly validate so let it through and let the server catch it
+                return true;
+            } if(isNaN(value)) {
                 size = value.length;
                 message = options.message['string'] || options.message || $.fn.bootstrapValidator.i18n.between.string;
             } else {
@@ -245,7 +252,7 @@
                 return true;
             }
 
-            var message = options.message['digitsBetween'] || options.message || $.fn.bootstrapValidator.i18n.digitsBetween.default;
+            var message = options.message['digitsBetween'] || options.message || $.fn.bootstrapValidator.i18n.digitsBetween['default'];
 
             return {
                 valid : false,
@@ -257,17 +264,17 @@
 }(window.jQuery));
 ;(function($) {
 
-    $.fn.bootstrapValidator.i18n.in = $.extend($.fn.bootstrapValidator.i18n.in || {}, {
+    $.fn.bootstrapValidator.i18n.isIn = $.extend($.fn.bootstrapValidator.i18n.isIn || {}, {
         'default' : 'The selected value is invalid'
     });
 
-    $.fn.bootstrapValidator.validators.in = {
+    $.fn.bootstrapValidator.validators.isIn = {
 
         validate: function(validator, $field, options) {
 
             var value = $field.val();
 
-            var message = options.message['in'] || options.message || $.fn.bootstrapValidator.i18n.in.default;
+            var message = options.message['isIn'] || options.message || $.fn.bootstrapValidator.i18n.isIn['default'];
 
             return {
                 valid : $.inArray(value, options.values) >= 0,
@@ -295,7 +302,10 @@
                 return true;
             }
 
-            if(isNaN(value)) {
+            if($field.attr('type') == 'file') {
+                // can't properly validate so let it through and let the server catch it
+                return true;
+            } if(isNaN(value)) {
                 size = value.length;
                 message = options.message['string'] || options.message || $.fn.bootstrapValidator.i18n.max.string;
             } else {
@@ -329,7 +339,10 @@
                 return true;
             }
 
-            if(isNaN(value)) {
+            if($field.attr('type') == 'file') {
+                // can't properly validate so let it through and let the server catch it
+                return true;
+            } if(isNaN(value)) {
                 size = value.length;
                 message = options.message['string'] || options.message || $.fn.bootstrapValidator.i18n.min.string;
             } else {
@@ -357,7 +370,7 @@
 
             var value = $field.val();
 
-            var message = options.message['notIn'] || options.message || $.fn.bootstrapValidator.i18n.notIn.default;
+            var message = options.message['notIn'] || options.message || $.fn.bootstrapValidator.i18n.notIn['default'];
 
             return {
                 valid : $.inArray(value, options.values) == -1,
@@ -389,7 +402,7 @@
                 return true;
             }
 
-            var message = options.message['numDigits'] || options.message || $.fn.bootstrapValidator.i18n.numDigits.default;
+            var message = options.message['numDigits'] || options.message || $.fn.bootstrapValidator.i18n.numDigits['default'];
 
             return {
                 valid : false,
@@ -431,7 +444,7 @@
                 return true;
             }
 
-            var message = options.message['requiredWithAll'] || options.message || $.fn.bootstrapValidator.i18n.requiredWithAll.default;
+            var message = options.message['requiredWithAll'] || options.message || $.fn.bootstrapValidator.i18n.requiredWithAll['default'];
 
             return {
                 valid : false,
@@ -458,6 +471,12 @@
                 return true;
             }
 
+            if( compareWith.is('[type=checkbox]') ) {
+
+                if( !compareWith.is(':checked') ) { return true; }
+
+            }
+
             if (compareWith.val() !== options.value) {
                 return true;
             }
@@ -466,7 +485,7 @@
                 return true;
             }
 
-            var message = options.message['requiredIf'] || options.message || $.fn.bootstrapValidator.i18n.requiredIf.default;
+            var message = options.message['requiredIf'] || options.message || $.fn.bootstrapValidator.i18n.requiredIf['default'];
 
             return {
                 valid : false,
@@ -510,7 +529,7 @@
                 return true;
             }
 
-            var message = options.message['requiredWith'] || options.message || $.fn.bootstrapValidator.i18n.requiredWith.default;
+            var message = options.message['requiredWith'] || options.message || $.fn.bootstrapValidator.i18n.requiredWith['default'];
 
             return {
                 valid : false,
@@ -554,7 +573,7 @@
                 return true;
             }
 
-            var message = options.message['requiredWithout'] || options.message || $.fn.bootstrapValidator.i18n.requiredWithout.default;
+            var message = options.message['requiredWithout'] || options.message || $.fn.bootstrapValidator.i18n.requiredWithout['default'];
 
             return {
                 valid : false,
@@ -575,8 +594,11 @@
         validate: function(validator, $field, options) {
 
             var value = $field.val(),
-                required = true;
+                required = true,
+                valid = false,
+                status = null;
 
+            // check to see if any of the other fields has content
             $.each(options.fields, function(ix, field) {
 
                 var $field = validator.getFieldElements(field);
@@ -589,19 +611,38 @@
             });
 
             if(!required) {
-                return true;
+
+                // one of the other fields has content, so this one is ok
+                valid = true;
             }
 
             if(value !== '') {
-                return true;
+
+                // the other fields can pass because this one has content
+                status = 'VALID';
+                valid = true;
+
+            } else {
+
+                // everything is a fail because they are all empty
+                status = 'INVALID';
+                valid = false;
+
             }
 
-            var message = options.message['requiredWithoutAll'] || options.message || $.fn.bootstrapValidator.i18n.requiredWithoutAll.default;
+            // update the status of the other fields
+            if(status) {
+                $.each(options.fields, function(ix, field) {
+                    validator.updateStatus(field, status, null);
+                });
+            }
+
+            var message = options.message['requiredWithoutAll'] || options.message || $.fn.bootstrapValidator.i18n.requiredWithoutAll['default'];
 
             return {
-                valid : false,
+                valid : valid,
                 message : $.fn.bootstrapValidator.helpers.format(message, options.fields.join(', '))
-            }
+            };
         }
     };
 
@@ -620,11 +661,19 @@
             var value = $field.val(),
                 size, message;
 
-            if(isNaN(value)) {
+            if(value == '') {
+                return true;
+            }
+
+            if($field.attr('type') == 'file') {
+                // can't properly validate so let it through and let the server catch it
+                return true;
+            } else if(isNaN(value)) {
                 size = value.length;
                 message = options.message['string'] || options.message || $.fn.bootstrapValidator.i18n.size.string;
             } else {
                 size = parseFloat(value);
+                valid == options.size;
                 message = options.message['numeric'] || options.message || $.fn.bootstrapValidator.i18n.size.numeric;
             }
 
