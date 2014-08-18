@@ -16,11 +16,19 @@
             var value = $field.val(),
                 size, message;
 
-            if(isNaN(value)) {
+            if(value == '') {
+                return true;
+            }
+
+            if($field.attr('type') == 'file') {
+                // can't properly validate so let it through and let the server catch it
+                return true;
+            } else if(isNaN(value)) {
                 size = value.length;
                 message = options.message['string'] || options.message || $.fn.bootstrapValidator.i18n.size.string;
             } else {
                 size = parseFloat(value);
+                valid == options.size;
                 message = options.message['numeric'] || options.message || $.fn.bootstrapValidator.i18n.size.numeric;
             }
 
