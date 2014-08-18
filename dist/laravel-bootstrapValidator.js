@@ -2,7 +2,7 @@
  * Laravel BootstrapValidator ()
  * 
  *
- * @version     v0.0.1, built on 2014-08-13 2:40:11 PM
+ * @version     v0.0.1, built on 2014-08-18 1:53:50 PM
  * @author      
  * @copyright   (c) 2014 
  * @license     
@@ -50,6 +50,10 @@
         validate: function(validator, $field, options) {
 
             var value = $field.val();
+
+            if(value == '') {
+                return true;
+            }
 
             var date = moment(value, 'DD-MM-YYYY HH:mm:ss');
 
@@ -176,6 +180,10 @@
 
             var value = $field.val();
 
+            if(value == '') {
+                return true;
+            }
+
             var date = moment(value, 'DD-MM-YYYY HH:mm:ss');
 
             if (!date.isValid()) {
@@ -207,9 +215,7 @@
             var value = $field.val(),
                 size, message;
 
-            if(value == '') {
-                return true;
-            }
+            if(value == '') { return true; }
 
             if($field.attr('type') == 'file') {
                 // can't properly validate so let it through and let the server catch it
@@ -605,37 +611,30 @@
 
                 if ($field && $field.val() !== '') {
                     required = false;
-                    return false;
+                    return true;
                 }
 
             });
 
             if(!required) {
-
-                // one of the other fields has content, so this one is ok
+                // one of the other fields has content, so we are ok
                 valid = true;
-            }
-
-            if(value !== '') {
-
-                // the other fields can pass because this one has content
-                status = 'VALID';
-                valid = true;
-
             } else {
-
-                // everything is a fail because they are all empty
-                status = 'INVALID';
-                valid = false;
-
+                if(value !== '') {
+                    // the other fields can pass because this one has content
+                    valid = true;
+                } else {
+                    // everything is a fail because they are all empty
+                    valid = false;
+                }
             }
 
-            // update the status of the other fields
-            if(status) {
-                $.each(options.fields, function(ix, field) {
-                    validator.updateStatus(field, status, null);
-                });
-            }
+            // update the status of all the fields
+
+            validator.updateStatus($field, valid ? 'VALID' : 'INVALID' , null);
+            $.each(options.fields, function(ix, field) {
+                validator.updateStatus(field, valid ? 'VALID' : 'INVALID' , null);
+            });
 
             var message = options.message['requiredWithoutAll'] || options.message || $.fn.bootstrapValidator.i18n.requiredWithoutAll['default'];
 

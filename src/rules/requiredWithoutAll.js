@@ -24,37 +24,30 @@
 
                 if ($field && $field.val() !== '') {
                     required = false;
-                    return false;
+                    return true;
                 }
 
             });
 
             if(!required) {
-
-                // one of the other fields has content, so this one is ok
+                // one of the other fields has content, so we are ok
                 valid = true;
-            }
-
-            if(value !== '') {
-
-                // the other fields can pass because this one has content
-                status = 'VALID';
-                valid = true;
-
             } else {
-
-                // everything is a fail because they are all empty
-                status = 'INVALID';
-                valid = false;
-
+                if(value !== '') {
+                    // the other fields can pass because this one has content
+                    valid = true;
+                } else {
+                    // everything is a fail because they are all empty
+                    valid = false;
+                }
             }
 
-            // update the status of the other fields
-            if(status) {
-                $.each(options.fields, function(ix, field) {
-                    validator.updateStatus(field, status, null);
-                });
-            }
+            // update the status of all the fields
+
+            validator.updateStatus($field, valid ? 'VALID' : 'INVALID' , null);
+            $.each(options.fields, function(ix, field) {
+                validator.updateStatus(field, valid ? 'VALID' : 'INVALID' , null);
+            });
 
             var message = options.message['requiredWithoutAll'] || options.message || $.fn.bootstrapValidator.i18n.requiredWithoutAll['default'];
 
