@@ -6,7 +6,8 @@
 
     $.fn.bootstrapValidator.i18n.max = $.extend($.fn.bootstrapValidator.i18n.max || {}, {
         'string' : 'Please enter less than %s characters',
-        'numeric' : 'Please enter a value less than %s'
+        'numeric' : 'Please enter a value less than %s',
+        'file' : 'File size must be smaller than %skb'
     });
 
     $.fn.bootstrapValidator.validators.max = {
@@ -36,7 +37,7 @@
 
             } else {
 
-                size = parseFloat(value);
+                size = parseFloat(value) * 1024;
                 message = options.message['numeric'] || options.message || $.fn.bootstrapValidator.i18n.max.numeric;
 
             }

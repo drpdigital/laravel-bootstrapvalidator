@@ -6,7 +6,8 @@
 
     $.fn.bootstrapValidator.i18n.between = $.extend($.fn.bootstrapValidator.i18n.between || {}, {
         'string' : 'Must be between %s and %s characters',
-        'numeric' : 'Please enter a value between %s and %s'
+        'numeric' : 'Please enter a value between %s and %s',
+        'file' : 'File size must be between than %s and $skb'
     });
 
     $.fn.bootstrapValidator.validators.between = {
@@ -14,7 +15,8 @@
         validate: function(validator, $field, options) {
 
             var value = $field.val(),
-                size, message;
+                size, message,
+                html5 = (window.File && window.FileList && window.FileReader);
 
             if(value == '') { return true; }
 
@@ -33,7 +35,7 @@
 
             } else {
 
-                size = parseFloat(value);
+                size = parseFloat(value) * 1024;
                 message = options.message['numeric'] || options.message || $.fn.bootstrapValidator.i18n.between.numeric;
 
             }
