@@ -27,7 +27,8 @@
                 // can't properly validate so let it through and let the server catch it
                 if(!html5) { return true; }
 
-                size = $field[0].files[0].size;
+                // in kb
+                size = $field[0].files[0].size / 1024;
                 message = options.message['file'] || options.message || $.fn.bootstrapValidator.i18n.min.file;
 
             } else if(isNaN(value)) {
@@ -37,7 +38,7 @@
 
             } else {
 
-                size = parseFloat(value) * 1024;
+                size = parseFloat(value);
                 message = options.message['numeric'] || options.message || $.fn.bootstrapValidator.i18n.min.numeric;
 
             }

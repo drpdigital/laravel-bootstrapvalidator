@@ -2,7 +2,7 @@
  * Laravel BootstrapValidator ()
  * 
  *
- * @version     v0.0.1, built on 2014-08-21 12:06:31 PM
+ * @version     v0.0.1, built on 2014-08-21 3:06:39 PM
  * @author      
  * @copyright   (c) 2014 
  * @license     
@@ -205,7 +205,8 @@
 
     $.fn.bootstrapValidator.i18n.between = $.extend($.fn.bootstrapValidator.i18n.between || {}, {
         'string' : 'Must be between %s and %s characters',
-        'numeric' : 'Please enter a value between %s and %s'
+        'numeric' : 'Please enter a value between %s and %s',
+        'file' : 'File size must be between than %s and $skb'
     });
 
     $.fn.bootstrapValidator.validators.between = {
@@ -213,7 +214,8 @@
         validate: function(validator, $field, options) {
 
             var value = $field.val(),
-                size, message;
+                size, message,
+                html5 = (window.File && window.FileList && window.FileReader);
 
             if(value == '') { return true; }
 
@@ -222,7 +224,8 @@
                 // can't properly validate so let it through and let the server catch it
                 if(!html5) { return true; }
 
-                size = $field[0].files[0].size;
+                // in kb
+                size = $field[0].files[0].size / 1024;
                 message = options.message['file'] || options.message || $.fn.bootstrapValidator.i18n.between.file;
 
             } else if(isNaN(value)) {
@@ -303,7 +306,8 @@
 
     $.fn.bootstrapValidator.i18n.max = $.extend($.fn.bootstrapValidator.i18n.max || {}, {
         'string' : 'Please enter less than %s characters',
-        'numeric' : 'Please enter a value less than %s'
+        'numeric' : 'Please enter a value less than %s',
+        'file' : 'File size must be smaller than %skb'
     });
 
     $.fn.bootstrapValidator.validators.max = {
@@ -323,7 +327,8 @@
                 // can't properly validate so let it through and let the server catch it
                 if(!html5) { return true; }
 
-                size = $field[0].files[0].size;
+                // in kb
+                size = $field[0].files[0].size / 1024;
                 message = options.message['file'] || options.message || $.fn.bootstrapValidator.i18n.max.file;
 
             } else if(isNaN(value)) {
@@ -350,7 +355,8 @@
 
     $.fn.bootstrapValidator.i18n.min = $.extend($.fn.bootstrapValidator.i18n.min || {}, {
         'string' : 'Please enter more than %s characters',
-        'numeric' : 'Please enter a value more than %s'
+        'numeric' : 'Please enter a value more than %s',
+        'file' : 'File size must be larger than %skb'
     });
 
     $.fn.bootstrapValidator.validators.min = {
@@ -370,7 +376,8 @@
                 // can't properly validate so let it through and let the server catch it
                 if(!html5) { return true; }
 
-                size = $field[0].files[0].size;
+                // in kb
+                size = $field[0].files[0].size / 1024;
                 message = options.message['file'] || options.message || $.fn.bootstrapValidator.i18n.min.file;
 
             } else if(isNaN(value)) {
@@ -679,7 +686,8 @@
 
     $.fn.bootstrapValidator.i18n.size = $.extend($.fn.bootstrapValidator.i18n.size || {}, {
         'string' : 'Please enter exactly %s characters',
-        'numeric' : 'Must be %s'
+        'numeric' : 'Must be %s',
+        'file' : 'File size must be exactly %skb'
     });
 
     $.fn.bootstrapValidator.validators.size = {
@@ -699,7 +707,8 @@
                 // can't properly validate so let it through and let the server catch it
                 if(!html5) { return true; }
 
-                size = $field[0].files[0].size;
+                // in kb
+                size = $field[0].files[0].size / 1024;
                 message = options.message['file'] || options.message || $.fn.bootstrapValidator.i18n.min.file;
 
             } else if(isNaN(value)) {
@@ -709,7 +718,7 @@
 
             } else {
 
-                size = parseFloat(value);
+                size = parseFloat(value) * 1024;
                 message = options.message['numeric'] || options.message || $.fn.bootstrapValidator.i18n.size.numeric;
 
             }
