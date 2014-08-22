@@ -1,1 +1,1 @@
-# Laravel BootstrapValidator
+# Laravel Bootstrap Validator
